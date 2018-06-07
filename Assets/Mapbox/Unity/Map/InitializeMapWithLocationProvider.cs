@@ -29,7 +29,7 @@
 			_locationProvider.OnLocationUpdated -= LocationProvider_OnLocationUpdated;
 			_map.Initialize(location.LatitudeLongitude, _map.AbsoluteZoom);
 
-			transform.position = new Vector3(0,5,0); 
+			transform.position = new Vector3(0,0,0); 
 		}
 	}
 }
