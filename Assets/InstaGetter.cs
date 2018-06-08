@@ -12,14 +12,24 @@ public class InstaGetter : MonoBehaviour {
 
 	// Use this for initialization
 	IEnumerator Start () {
-		string url = "https://api.instagram.com/v1/media/search?lat=28.666666666667&lng=77.216666666667&distance=1000000&access_token=1234845436.cab71bf.c4f2b5cc425a48dcb4bbcabb7f5aef5d";
+		string url = "https://api.instagram.com/v1/media/search?lat=28.666666666667&lng=77.216666666667&distance=10000000&access_token=1234845436.cab71bf.c4f2b5cc425a48dcb4bbcabb7f5aef5d";
+		string url1 = "https://api.instagram.com/v1/media/search?lat=28.7500749&lng=77.1154765&distance=10000000&access_token=5603831518.4cd38f1.29c7da189d37456bb6892822937486ac";
 		WWW www = new WWW(url);
 		yield return www;
+		WWW www1 = new WWW(url1);
+		yield return www1;
 		string api_response = www.text;
+		string api_response1 = www1.text;
+		Debug.Log(api_response1);
 		Debug.Log(api_response);
 
 		IDictionary apiParse = (IDictionary)Json.Deserialize(api_response);
+		IDictionary apiParse1 = (IDictionary)Json.Deserialize(api_response1);
+		IList instagramPicturesList1 = (IList)apiParse1["data"];
 		IList instagramPicturesList = (IList)apiParse["data"];
+		foreach(IDictionary temp in instagramPicturesList1) {
+			instagramPicturesList.Add(temp);
+		}
 		foreach(IDictionary instagramPicture in instagramPicturesList) {
 			IDictionary images = (IDictionary)instagramPicture["images"];
 			IDictionary standardResolution = (IDictionary)images["standard_resolution"];
